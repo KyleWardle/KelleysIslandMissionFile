@@ -1,0 +1,6 @@
+#include  "Kyle\index.h"
+
+class CfgFunctions
+{
+	#include "Kyle\Functions.h"
+};
