@@ -4,7 +4,16 @@ class KyleKeyHandler
         file = "Kyle\handler";
         class globalKeyHandler {};
     };
-}
+};
+
+class KyleHelpers
+{
+    class Main {
+        file = "Kyle\helpers";
+
+        class createFireEffect {};
+    };
+};
 
 class KyleComp
 {
@@ -28,5 +37,20 @@ class KyleHolster
         class formWeaponArray {};
         class addWeaponFromArray {};
         class getMagazineCount {};
+    };
+};
+
+class KyleEmsMissions
+{
+    class Main {};
+};
+
+class KyleEmsMission
+{
+    class Main {
+        file = "Kyle\ems_missions\missions";
+
+        class carFire {};
+        class fuelTruckFire {};
     };
 };
