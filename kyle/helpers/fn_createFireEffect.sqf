@@ -9,6 +9,7 @@ _smoke	= "";
 _light	= objNull;
 _color		= [1,0.85,0.6];
 _ambient	= [1,0.3,0];
+_return = [];
 
 switch (_effect) do {
 	case "FIRE_SMALL" : {
@@ -42,12 +43,14 @@ switch (_effect) do {
 
 if (_fire != "") then {
 	_eFire = "#particlesource" createVehicle _pos;
+	_return pushback _eFire;
 	_eFire setParticleClass _fire;
 	_eFire setPosATL _pos;
 };
 
 if (_smoke != "") then {
 	_eSmoke = "#particlesource" createVehicle _pos;
+	_return pushback _eSmoke;
 	_eSmoke setParticleClass _smoke;
 	_eSmoke setPosATL _pos;
 };
@@ -56,6 +59,7 @@ if (_smoke != "") then {
 if (_effect in ["FIRE_BIG","FIRE_MEDIUM"]) then {
 	_pos   = [_pos select 0,_pos select 1,(_pos select 2)+1];
 	_light = createVehicle ["#lightpoint", _pos, [], 0, "CAN_COLLIDE"];
+	_return pushback _light;
 	_light setPosATL _pos;
 
 	_light setLightBrightness _brightness;
@@ -65,3 +69,5 @@ if (_effect in ["FIRE_BIG","FIRE_MEDIUM"]) then {
 	_light setLightAttenuation _attenuation;
 	_light setLightDayLight false;
 };
+
+_return;

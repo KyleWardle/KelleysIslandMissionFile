@@ -42,7 +42,13 @@ class KyleHolster
 
 class KyleEmsMissions
 {
-    class Main {};
+    class Main {
+        file = "Kyle\ems_missions";
+
+        class initMission {};
+        class getEventVar {};
+        class setEventVar {};
+    };
 };
 
 class KyleEmsMission
@@ -52,5 +58,6 @@ class KyleEmsMission
 
         class carFire {};
         class fuelTruckFire {};
+        class gasLeak {};
     };
 };
