@@ -1,13 +1,17 @@
+#include "..\vars.h"
 
 systemChat "Truck Fire!";
 
-params ["_position"];
+params ["_missionId"];
+
+[_missionId, EVENT_VAR_DIFFICULTY, 150] call KyleEmsMissions_fnc_setEventVar;
+_position = [_missionId, EVENT_VAR_POSITION] call KyleEmsMissions_fnc_getEventVar;
 
 _vec = "Land_Wreck_Truck_F" createVehicle _position;
 
 
 _firePos = [_position select 0, (_position select 1) + 1.2, (_position select 2) + 2];
-[_firePos, "FIRE_BIG"] call KyleHelpers_fnc_createFireEffect;
+_fireVecs = [_firePos, "FIRE_BIG"] call KyleHelpers_fnc_createFireEffect;
 
  // @todo: change last number to -2 when done
 
@@ -16,6 +20,19 @@ uiSleep 10; // Give the scrubs some time to gtfo
 
 for "_i" from 0 to 1 step 0 do
 {
+    _missionComplete = [_missionId, EVENT_VAR_IS_COMPLETE] call KyleEmsMissions_fnc_getEventVar;
+
+    if (_missionComplete isEqualTo true) exitWith {
+        // Cleanup
+        deleteVehicle _vec;
+
+        for "_vehicle" from 0 to (count _fireVecs - 1) do {
+            deleteVehicle (_fireVecs select _vehicle);
+        };
+
+        [_missionId, EVENT_VAR_CLEAN_UP, true] call KyleEmsMissions_fnc_setEventVar;
+    };
+
     _random = round (random 5);
     if (_random isEqualTo 1) then {
         _possiblePositions = [
@@ -34,22 +51,4 @@ for "_i" from 0 to 1 step 0 do
     };
 
     uiSleep 0.5;
-
-    // for "_x" from 0 to 300 step 1 do
-    // {
-    //
-    // };
-    //
-    // [_vec,["Put out fire",{
-    //     systemChat "Put out fire!!!";
-    // },[],1,false,true,"","player distance _target < 15"]] remoteExec ["addAction", 0];
-    // uiSleep 60;
-
-
 };
-
-
-// Explodes for 5 minutes
-// after 5 mins, they have one minute to clear explosion (20s)
-// if they dont clear it in time, another 5 mins of explosions.
-// rinse nad repoeat

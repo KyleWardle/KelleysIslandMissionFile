@@ -4,6 +4,8 @@ systemChat "Car Fire!";
 
 params ["_missionId"];
 
+[_missionId, EVENT_VAR_DIFFICULTY, 150] call KyleEmsMissions_fnc_setEventVar;
+
 _position = [_missionId, EVENT_VAR_POSITION] call KyleEmsMissions_fnc_getEventVar;
 
 _vec = "Land_Wreck_Car2_F" createVehicle _position;
@@ -14,7 +16,7 @@ _fireVecs = [_position, selectRandom _fireSize] call KyleHelpers_fnc_createFireE
 
 
 
-while {true} do {
+for "_i" from 0 to 1 step 0 do {
     _missionComplete = [_missionId, EVENT_VAR_IS_COMPLETE] call KyleEmsMissions_fnc_getEventVar;
 
     if (_missionComplete isEqualTo true) exitWith {

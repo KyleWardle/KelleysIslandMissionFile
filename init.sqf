@@ -19,4 +19,4 @@ KYLE_PLAYER_HOLSTERS = [
 ];
 
 GLOBAL_EVENTS = [];
-// [_missionComplete, _missionName, _position, _vecs]
+// [_uid, _missionComplete, _missionName, _position, _vecs]
